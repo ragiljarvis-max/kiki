@@ -89,10 +89,6 @@ class FileTransportActivity : BaseCoroutineStateActivity<FileTransportActivity.C
         MutableSharedFlow(onBufferOverflow = BufferOverflow.DROP_OLDEST, extraBufferCapacity = 1)
     }
 
-    val gameEventFlow: MutableSharedFlow<String> by lazyViewModelField("gameEventFlow") {
-        MutableSharedFlow(onBufferOverflow = BufferOverflow.DROP_OLDEST, extraBufferCapacity = 10)
-    }
-
     /**
      * Remote device request scan current device's dir.
      */
@@ -230,12 +226,6 @@ class FileTransportActivity : BaseCoroutineStateActivity<FileTransportActivity.C
                                 override fun onNewState(state: FileExploreState) {}
                                 // New message coming.
                                 override fun onNewMsg(msg: SendMsgReq) {
-                                    if (msg.msg.startsWith("[GAME_EVENT]:")) {
-                                        launch(Dispatchers.Main) {
-                                            gameEventFlow.emit(msg.msg.removePrefix("[GAME_EVENT]:"))
-                                        }
-                                        return
-                                    }
                                     updateNewMessage(
                                         Message(
                                             time = msg.sendTime,

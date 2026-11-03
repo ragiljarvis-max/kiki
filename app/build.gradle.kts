@@ -33,10 +33,14 @@ android {
             keyPassword = "android"
         }
         create("releaseConfig") {
-            storeFile = file("debugkey/debug.jks")
-            storePassword = "123456"
-            keyAlias = "key0"
-            keyPassword = "123456"
+            // KIKI_KEYSTORE env override (CI); fallback debug keystore for local builds
+            val ksPath = System.getenv("KIKI_KEYSTORE") ?: "${rootDir}/debug.keystore"
+            val ksPass = System.getenv("KIKI_KEYSTORE_PASSWORD") ?: "android"
+            val ksAlias = System.getenv("KIKI_KEY_ALIAS") ?: "androiddebugkey"
+            storeFile = file(ksPath)
+            storePassword = ksPass
+            keyAlias = ksAlias
+            keyPassword = System.getenv("KIKI_KEY_PASSWORD") ?: ksPass
         }
     }
 
