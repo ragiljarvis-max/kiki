@@ -1,12 +1,12 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
-    <style name="Theme.TFileTransporter" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+<resources xmlns:tools="http://schemas.android.com">
+    <!-- Base application theme. Light only (single theme). -->
+    <style name="Theme.TFileTransporter" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/teal_200</item>
-        <item name="colorAccent">@color/teal_200</item>
-        <item name="colorPrimaryDark">@color/teal_700</item>
+        <item name="colorPrimary">@color/kiki_pink</item>
+        <item name="colorAccent">@color/kiki_pink</item>
+        <item name="colorPrimaryDark">@color/kiki_pink_dark</item>
 
-        <item name="android:windowBackground">@color/white</item>
+        <item name="android:windowBackground">@color/kiki_cream</item>
         <item name="android:splitMotionEvents">false</item>
         <item name="android:windowEnableSplitTouch">false</item>
     </style>

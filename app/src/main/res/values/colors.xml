@@ -1,10 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- KIKI kawaii palette: dark pink accent, single light theme -->
     <color name="purple_200">#FFBB86FC</color>
     <color name="purple_500">#FF6200EE</color>
     <color name="purple_700">#FF3700B3</color>
-    <color name="teal_200">#FF03DAC5</color>
-    <color name="teal_700">#FF018786</color>
+    <!-- dark pink accent (was neon teal) -->
+    <color name="teal_200">#C2185B</color>
+    <color name="teal_700">#AD1457</color>
+    <color name="kiki_pink">#C2185B</color>
+    <color name="kiki_pink_dark">#AD1457</color>
+    <color name="kiki_pink_light">#FCE4EC</color>
+    <color name="kiki_violet">#B39DDB</color>
+    <color name="kiki_cream">#FFF8F0</color>
+
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="white_1">#FCFCFC</color>
@@ -17,6 +25,6 @@
 
     <color name="line_color">#F2F2F2</color>
 
-    <color name="color_background">#F8F9FA</color>
+    <color name="color_background">#FFF8F0</color>
     <color name="md_dialog_title_color">#DE000000</color>
 </resources>
