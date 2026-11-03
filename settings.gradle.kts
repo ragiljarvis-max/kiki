@@ -25,3 +25,4 @@ dependencyResolutionManagement {
 rootProject.name = "kiki"
 include(":app")
 include(":net")
+include(":desktop")

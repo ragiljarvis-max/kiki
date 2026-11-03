@@ -1,0 +1,100 @@
+name: Release Build
+
+on:
+  push:
+    branches: [ "main", "master" ]
+  pull_request:
+    branches: [ "main", "master" ]
+  workflow_dispatch:
+
+jobs:
+  android:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+          cache: gradle
+
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+
+      - name: Generate signing keystore
+        run: |
+          keytool -genkeypair -keystore debug.keystore -storepass android \
+            -alias androiddebugkey -keypass android -keyalg RSA \
+            -validity 10000 -dname "CN=Android Debug,O=Android,C=US"
+        env:
+          KIKI_KEYSTORE: ${{ secrets.KIKI_KEYSTORE }}
+          KIKI_KEYSTORE_PASSWORD: ${{ secrets.KIKI_KEYSTORE_PASSWORD }}
+          KIKI_KEY_ALIAS: ${{ secrets.KIKI_KEY_ALIAS }}
+          KIKI_KEY_PASSWORD: ${{ secrets.KIKI_KEY_PASSWORD }}
+
+      - name: Build Release APK (arm64-v8a)
+        run: ./gradlew :app:assembleRelease
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: kiki-android-arm64
+          path: app/build/outputs/apk/release/**/*.apk
+
+  windows-portable:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+          cache: gradle
+
+      - name: Build portable zip
+        run: ./gradlew :desktop:packagePortableZip
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: kiki-windows-portable
+          path: desktop/build/dist/KIKI-portable.zip
+
+  linux-appimage:
+    # ubuntu:20.04 => glibc 2.31 floor (runs on Ubuntu 20.04+)
+    runs-on: ubuntu-latest
+    container: ubuntu:20.04
+    steps:
+      - name: Install deps
+        run: |
+          apt-get update
+          apt-get install -y git curl unzip file zstd
+
+      - uses: actions/checkout@v4
+
+      - name: Install JDK 21 (Temurin, full jmods)
+        run: |
+          curl -sL "https://api.adoptium.net/v3/binary/latest/21/ga/linux/x64/jdk/hotspot/normal/eclipse" -o /tmp/jdk.tar.gz
+          mkdir -p /opt/jdk && tar xzf /tmp/jdk.tar.gz -C /opt/jdk --strip-components=1
+          echo "/opt/jdk/bin" >> $GITHUB_PATH
+
+      - name: Build app-image (portable)
+        run: ./gradlew :desktop:packagePortableZip
+
+      - name: Build AppImage
+        run: |
+          curl -sL "https://github.com/AppImage/appimagetool/releases/download/continuous/appimagetool-x86_64.AppImage" -o /tmp/appimagetool
+          chmod +x /tmp/appimagetool
+          cd desktop/build/compose/binaries/main/app
+          ARCH=x86_64 /tmp/appimagetool -n KIKI 2>/dev/null || \
+            ARCH=x86_64 /tmp/appimagetool KIKI
+          ls -la *.AppImage
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: kiki-linux
+          path: |
+            desktop/build/compose/binaries/main/app/*.AppImage
+            desktop/build/dist/KIKI-portable.zip
