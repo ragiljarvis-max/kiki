@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item android:id="@+id/create_hotspot"
+          android:title="Hotspot"
+          android:icon="@drawable/ic_wifi_tethering"
+          app:showAsAction="ifRoom"/>
+    <item android:id="@+id/history"
+          android:title="@string/history_title"
+          android:icon="@drawable/ic_history"
+          app:showAsAction="ifRoom"/>
+    <item android:id="@+id/web_share"
+          android:title="@string/web_share_title"
+          android:icon="@drawable/ic_web"
+          app:showAsAction="ifRoom"/>
+    <item android:id="@+id/file_manager"
+          android:title="@string/file_manager_title"
+          android:icon="@drawable/folder_outline"
+          app:showAsAction="ifRoom"/>
+    <item android:id="@+id/cleaner"
+          android:title="@string/cleaner_title"
+          android:icon="@drawable/ic_cleaner"
+          app:showAsAction="ifRoom"/>
+    <item android:id="@+id/apk_extractor"
+          android:title="@string/apk_extractor_title"
+          android:icon="@drawable/ic_apk"
+          app:showAsAction="ifRoom"/>
+    <item android:id="@+id/network_speed"
+          android:title="@string/network_speed_title"
+          android:icon="@drawable/ic_wifi_speed"
+          app:showAsAction="ifRoom"/>
+    <item android:id="@+id/vault"
+          android:title="@string/vault_title"
+          android:icon="@drawable/ic_vault"
+          app:showAsAction="ifRoom"/>
+    <item android:id="@+id/clone_phone"
+          android:title="@string/clone_phone_title"
+          app:showAsAction="never"/>
+    <item android:id="@+id/instructions"
+          android:title="@string/instructions_title"
+          app:showAsAction="never"/>
+    <item android:id="@+id/settings"
+          android:title="@string/settings_title"
+          android:icon="@drawable/ic_settings"
+          app:showAsAction="always"/>
+</menu>

@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">KIKI</string>
+
+    <string name="dialog_positive">موافق</string>
+    <string name="dialog_negative">إلغاء</string>
+    <string name="error_toast">خطأ: %s</string>
+
+    <!--region FileTransportActivity-->
+    <string name="file_transport_activity_tab_my_apps">تطبيقاتي</string>
+    <string name="file_transport_activity_tab_my_images">صوري</string>
+    <string name="file_transport_activity_tab_my_videos">فيديوهاتي</string>
+    <string name="file_transport_activity_tab_my_audios">صوتياتي</string>
+    <string name="file_transport_activity_tab_my_dir">مجلداتي</string>
+    <string name="file_transport_activity_tab_remote_dir">المجلد البعيد</string>
+    <string name="file_transport_activity_tab_message">الرسائل</string>
+    <string name="file_count">%d ملفات</string>
+    <string name="connection_error_title">خطأ في الاتصال</string>
+    <string name="connection_error_message">تم إغلاق الاتصال، يرجى إعادة الاتصال.</string>
+    <string name="file_transfer_error_title">خطأ في النقل</string>
+    <string name="downloading_files_dialog_title" formatted="false">جاري تنزيل الملفات (%d/%d)</string>
+    <string name="sending_files_dialog_title" formatted="false">جاري إرسال الملفات (%d/%d)</string>
+    <string name="app_version">الإصدار: %s</string>
+    <string name="request_share_title">طلب مشاركة</string>
+    <string name="request_share_body">طلب مشاركة %d ملفات.</string>
+    <string name="request_share_positive">مشاركة</string>
+    <string name="request_share_negative">تجاهل</string>
+    <!--endregion-->
+
+    <!--region ConnectionActivity-->
+    <string name="local_network_connection_title">اتصال عبر الشبكة المحلية</string>
+    <string name="local_network_connection_description">إذا كان كلا الجهازين متصلين بنفس الشبكة، يمكنك استخدام هذه الطريقة للاتصال.\nاستخدم مسح رمز الاستجابة السريعة (QR) أو بث UDP.</string>
+    <string name="broadcast_connection_local_device">الجهاز المحلي: %s</string>
+    <string name="broadcast_connection_local_ip_address">عنوان IP المحلي: %s</string>
+    <string name="broadcast_connection_use_system_broadcast">استخدام بث النظام: </string>
+    <string name="local_network_scan_qr_code">مسح رمز الاستجابة السريعة</string>
+    <string name="local_network_show_qr_code">إظهار رمز الاستجابة السريعة</string>
+    <string name="broadcast_connection_as_receiver">البحث عن خوادم</string>
+    <string name="broadcast_connection_as_sender">كخادم</string>
+
+    <string name="broadcast_waiting_connect">في انتظار الاتصال&#8230;</string>
+    <string name="broadcast_waiting_cancel">إلغاء</string>
+
+    <string name="broadcast_request_connect">طلب اتصال</string>
+    <string name="broadcast_request_accept">قبول</string>
+    <string name="broadcast_request_deny">رفض</string>
+
+    <string name="broadcast_searching_server">جاري البحث&#8230;</string>
+    <string name="broadcast_searching_cancel">إلغاء</string>
+
+    <string name="tcp_scan_title">فحص الأجهزة</string>
+    <string name="tcp_scan_tips">يمكنك فحص الأجهزة الأخرى على نفس الشبكة. عندما يكون الخادم قيد التشغيل، سيتم اكتشاف جهازك من قبل الآخرين.</string>
+    <string name="tcp_scan_server_status_active">حالة الخادم: قيد التشغيل</string>
+    <string name="tcp_scan_server_status_error">حالة الخادم: خطأ</string>
+    <string name="tcp_scan_scan">فحص</string>
+
+    <string name="wifi_p2p_connection_title">اتصال عبر WiFi P2P</string>
+    <string name="wifi_p2p_connection_tips">فقط قم بتشغيل WiFi و GPS بالقرب من الجهاز الهدف وسيقوم النظام بالعثور عليه.</string>
+    <string name="wifi_p2p_connection_remote_device" formatted="false">الجهاز البعيد المتصل\nالاسم: %s\nعنوان IP: %s\nالحالة: %s</string>
+    <string name="wifi_p2p_connection_local_address">العنوان المحلي: %s</string>
+    <string name="wifi_p2p_connection_transfer_files">نقل الملفات</string>
+    <string name="wifi_p2p_connection_close_current_connection">إغلاق الاتصال</string>
+    <string name="local_network_local_address">العناوين المحلية: </string>
+
+    <string name="request_share_files">طلب مشاركة %d ملفات.</string>
+    <string name="drop_request_share_files">تجاهل</string>
+    <!--endregion-->
+
+    <!--region Size-->
+    <string name="size_B">%dB</string>
+    <string name="size_KB">%.2fKB</string>
+    <string name="size_MB">%.2fMB</string>
+    <string name="size_GB">%.2fGB</string>
+    <!--endregion-->
+
+    <!--region FolderMenu-->
+    <string name="folder_menu_select_all_files">تحديد جميع الملفات</string>
+    <string name="folder_menu_unselect_all_files">إلغاء تحديد جميع الملفات</string>
+    <string name="folder_menu_sort_by_date">فرز حسب تاريخ التعديل</string>
+    <string name="folder_menu_sort_by_file_name">فرز حسب الاسم</string>
+    <!--endregion-->
+
+    <!--region TransferSettingsMenu-->
+    <string name="transfer_setting_share_folder">مشاركة مجلدي</string>
+    <!--endregion-->
+
+    <!--region SettingsDialog-->
+    <string name="settings_title">الإعدادات</string>
+    <string name="setting_download_dir">مجلد التنزيلات</string>
+    <string name="setting_share_my_dir">مشاركة مجلدي</string>
+    <string name="setting_max_connections_size">الحد الأقصى لاتصالات Tcp</string>
+    <string name="setting_language">اللغة (Language)</string>
+    <string name="setting_about_app">حول التطبيق</string>
+    <string name="setting_developer">المطور: محمد هشام الصلاحي</string>
+    <!--endregion-->
+
+    <!--region RequestPermission-->
+    <string name="permission_request_title">طلب إذن</string>
+    <string name="permission_storage_request_content">يحتاج شير لود إلى إذن إدارة التخزين لمشاركة ملفاتك.</string>
+    <string name="prompt_enable_location_title">تفعيل الموقع (GPS)</string>
+    <string name="prompt_enable_location_content">يجب تفعيل خدمات الموقع للبحث عن الأجهزة القريبة عبر Wi-Fi Direct. يرجى تفعيل الموقع من الإعدادات.</string>
+    <string name="prompt_enable_wifi_title">تفعيل Wi-Fi</string>
+    <string name="prompt_enable_wifi_content">يجب تفعيل شبكة الـ Wi-Fi للاتصال ونقل الملفات. يرجى تفعيل الـ Wi-Fi.</string>
+    <!--endregion-->
+
+    <!--region FolderSelectActivity-->
+    <string name="folder_select_title">تحديد مجلد</string>
+    <string name="folder_select_create">إنشاء مجلد جديد</string>
+    <string name="folder_select_error_title">فشل في تحديد المجلد</string>
+    <string name="folder_select_error_body">خطأ: %s</string>
+    <string name="folder_select_create_folder_error">فشل في إنشاء المجلد</string>
+    <string name="folder_select_create_new_folder_hint">أدخل اسم المجلد</string>
+    <!--endregion-->
+
+    <!--region Media-->
+    <string name="media_artist_name">الفنان: %s</string>
+    <string name="media_album_name">الألبوم: %s</string>
+    <!--endregion-->
+
+    <!--region History & Web Share-->
+    <string name="history_title">سجل النقل</string>
+    <string name="history_sent_to">تم الإرسال إلى: %s</string>
+    <string name="history_received_from">تم الاستلام من: %s</string>
+    <string name="history_file_not_found">لم يتم العثور على الملف</string>
+    <string name="history_no_app_found">لا يوجد تطبيق لفتح هذا الملف</string>
+    
+    <string name="web_share_title">مشاركة عبر المتصفح</string>
+    <string name="web_share_start">بدء المشاركة</string>
+    <string name="web_share_stop">إيقاف المشاركة</string>
+    <string name="web_share_description">افتح العنوان التالي في متصفح الويب على جهاز آخر لتنزيل الملفات:</string>
+    <string name="web_share_select_files">يرجى تحديد الملفات للمشاركة أولاً</string>
+    <string name="web_share_running">المشاركة عبر المتصفح قيد التشغيل</string>
+    <string name="web_share_connect_wifi">يرجى الاتصال بشبكة Wi-Fi أولاً.</string>
+    <string name="web_share_failed">فشل بدء المشاركة عبر المتصفح</string>
+    <!--endregion-->
+
+    <string name="clone_phone_title">نقل الهاتف بالكامل (استنساخ)</string>
+    <string name="instructions_title">تعليمات الاستخدام</string>
+    <string name="instructions_desc">تم تصميم وبرمجه التطبيق ليعطيكم تجربه اسرع واخف واسهل لنقل الملفات.\n\nطريقة الاستخدام:\n1. اتصل عبر واي فاي مباشر أو عبر نقطة الاتصال.\n2. في وضع نقطة الاتصال، قم بمسح الباركود للاتصال تلقائياً.\n3. تصفح ملفاتك وانقلها بأقصى سرعة.\n\nمع تحيات المطور محمد هشام الصلاحي</string>
+
+    <!--region File Manager & Sharing-->
+    <string name="file_manager_title">مدير الملفات</string>
+    <string name="file_manager_subtitle">تصفح وأدر وأرسل التطبيقات، الصور، الفيديوهات والملفات</string>
+    <string name="shared_files_barcode_ready">تم تحديد الملفات! جاري فتح باركود الإرسال...</string>
+    <string name="tab_apps">تطبيقات وألعاب</string>
+    <string name="tab_images">الصور</string>
+    <string name="tab_videos">الفيديوهات</string>
+    <string name="tab_audios">الموسيقى</string>
+    <string name="tab_documents">المستندات</string>
+    <string name="tab_storage">ذاكرة الهاتف</string>
+    <string name="storage_stats">المستخدم: %1$s / الإجمالي: %2$s</string>
+    <string name="storage_internal">الذاكرة الداخلية</string>
+    <string name="storage_free">المتبقي: %s</string>
+    <string name="send_selected">إرسال (%d)</string>
+    <string name="delete_selected">حذف</string>
+    <string name="select_all">تحديد الكل</string>
+    <string name="deselect_all">إلغاء</string>
+    <string name="search_hint">بحث عن الملفات والتطبيقات...</string>
+    <string name="no_files_found">لم يتم العثور على عناصر</string>
+    <string name="delete_confirm_title">حذف العناصر</string>
+    <string name="delete_confirm_msg">هل أنت متأكد من حذف %d من العناصر المحددة؟</string>
+    <string name="file_details_title">تفاصيل الملف</string>
+    <string name="file_details_path">المسار: %s</string>
+    <string name="file_details_size">الحجم: %s</string>
+    <string name="file_details_modified">تاريخ التعديل: %s</string>
+    <string name="action_open">فتح</string>
+    <string name="action_send">إرسال</string>
+    <string name="action_delete">حذف</string>
+    <string name="action_details">التفاصيل</string>
+    <string name="action_rename">إعادة تسمية</string>
+    <string name="action_share">مشاركة</string>
+    <string name="rename_dialog_title">إعادة تسمية العنصر</string>
+    <string name="rename_dialog_hint">أدخل اسماً جديداً</string>
+    <string name="create_folder">مجلد جديد</string>
+    <string name="create_folder_hint">اسم المجلد</string>
+    <!--endregion-->
+
+    <!--region 4 Professional Additions (1, 2, 3, 4) in Arabic-->
+    <!-- 1. Junk & Storage Cleaner -->
+    <string name="cleaner_title">منظف الهاتف</string>
+    <string name="cleaner_subtitle">تنظيف الملفات المؤقتة والمهملة وتوفير مساحة التخزين</string>
+    <string name="cleaner_scanning">جاري فحص ذاكرة الجهاز والملفات المؤقتة…</string>
+    <string name="cleaner_clean_now">تنظيف الآن (%s)</string>
+    <string name="cleaner_cleaned_success">تم بنجاح تنظيف %s من الملفات غير الضرورية!</string>
+    <string name="cleaner_no_junk">هاتفك نظيف ومُحسّن بالكامل!</string>
+    <string name="cleaner_cat_cache">ملفات الكاش والمؤقتة</string>
+    <string name="cleaner_cat_apk">حزم تثبيت APK متبقية</string>
+    <string name="cleaner_cat_empty_dirs">مجلدات فارغة</string>
+    <string name="cleaner_cat_large_files">ملفات كبيرة الحجم (>50 م.ب)</string>
+    <string name="cleaner_cat_duplicate">سجلات وتنزيلات متكررة</string>
+    <string name="cleaner_items_count">%1$d عنصر (%2$s)</string>
+    <string name="cleaner_item_delete_warning">هل تريد بالتأكيد حذف ملفات المخلفات المحددة؟</string>
+
+    <!-- 2. APK Extractor & App Backup -->
+    <string name="apk_extractor_title">مستخرج التطبيقات APK</string>
+    <string name="apk_extractor_subtitle">استخراج وحفظ ومشاركة التطبيقات والألعاب المثبتة</string>
+    <string name="apk_extract_btn">استخراج APK</string>
+    <string name="apk_extracted_success">تم حفظ ملف APK في: %s</string>
+    <string name="apk_extract_failed">فشل استخراج ملف APK</string>
+    <string name="apk_extract_all">استخراج المحدد (%d)</string>
+    <string name="apk_send_barcode">إرسال بالباركود</string>
+    <string name="apk_version">الإصدار: %s</string>
+    <string name="apk_package">الحزمة: %s</string>
+    <string name="apk_search_hint">بحث في التطبيقات والألعاب…</string>
+
+    <!-- 3. Transfer Speedometer & Performance Booster -->
+    <string name="speed_peak">السرعة القصوى: %s</string>
+    <string name="speed_eta">الوقت المتبقي: %s</string>
+    <string name="speed_high_indicator">⚡ سرعة فائقة</string>
+    <string name="transfer_completed_title">اكتمل النقل بنجاح!</string>
+    <string name="transfer_summary_format">تم نقل %1$d ملف (%2$s) في %3$s بمتوسط سرعة %4$s</string>
+
+    <!-- 4. Instant Text & Clipboard Sharing -->
+    <string name="clipboard_paste_send">لصق وإرسال</string>
+    <string name="clipboard_copied">تم النسخ إلى الحافظة بنجاح!</string>
+    <!-- 5. Wi-Fi & Network Speed Analyzer -->
+    <string name="network_speed_title">سرعة الشبكة والواي فاي</string>
+    <string name="network_speed_subtitle">مقياس قوة الإشارة وسرعة الرابط وتشخيص زمن الوصول</string>
+    <string name="network_speed_test_btn">بدء فحص السرعة</string>
+    <string name="network_speed_testing">جاري فحص سرعة واستجابة الشبكة…</string>
+    <string name="network_speed_ping">زمن الاستجابة (Ping): %d ملّي ثانية</string>
+    <string name="network_speed_link">سرعة الرابط: %d ميغابت/ث</string>
+    <string name="network_speed_signal">قوة الإشارة: %1$d ديسيبل (%2$s)</string>
+    <string name="network_speed_band">التردد: %s</string>
+    <string name="network_speed_ssid">شبكة الواي فاي المتصلة: %s</string>
+    <string name="network_speed_tip_5ghz">🚀 نصيحة: شبكة أو نقطة اتصال 5 جيجاهرتز توفر سرعة نقل أعلى بما يصل إلى 5 أضعاف مقارنة بـ 2.4 جيجاهرتز!</string>
+    <string name="network_speed_excellent">ممتاز (سرعة نقل فائقة)</string>
+    <string name="network_speed_good">جيد جداً</string>
+    <string name="network_speed_fair">متوسط</string>
+    <string name="network_speed_weak">ضعيف (قد يؤثر على سرعة النقل)</string>
+    <string name="network_speed_download">السرعة: %s</string>
+    <string name="network_speed_local_ip">عنوان IP المحلي: %s</string>
+
+    <!-- 7. Secure Vault / Private Safe -->
+    <string name="vault_title">الخزنة السرية</string>
+    <string name="vault_subtitle">قفل وإخفاء الصور والفيديوهات والملفات برقم سري</string>
+    <string name="vault_enter_pin">أدخل رمز PIN المكون من 4 أرقام</string>
+    <string name="vault_setup_pin">تعيين رمز PIN جديد (4 أرقام)</string>
+    <string name="vault_confirm_pin">تأكيد رمز PIN الجديد</string>
+    <string name="vault_pin_mismatch">الرمزان غير متطابقين، يرجى المحاولة ثانية</string>
+    <string name="vault_pin_wrong">رمز PIN غير صحيح، حاول مرة أخرى</string>
+    <string name="vault_pin_set_success">تم تعيين رمز الخزنة بنجاح!</string>
+    <string name="vault_empty">لا توجد ملفات مقفلة في الخزنة حالياً.\nاضغط + لإخفاء وحماية ملفاتك الخاصة بأمان!</string>
+    <string name="vault_add_files">إضافة إلى الخزنة</string>
+    <string name="vault_restore">استعادة إلى الذاكرة</string>
+    <string name="vault_restored_success">تمت استعادة الملف إلى موقعه الأصلي بنجاح</string>
+    <string name="vault_locked_success">تم نقل %d عنصر إلى الخزنة السرية بنجاح</string>
+    <string name="vault_delete_confirm">هل تريد حذف هذا الملف نهائياً من الخزنة؟</string>
+    <string name="vault_tab_all">جميع الملفات</string>
+    <string name="vault_tab_photos">الصور</string>
+    <string name="vault_tab_videos">الفيديوهات</string>
+    <string name="vault_tab_docs">المستندات</string>
+    <string name="vault_change_pin">تغيير رمز PIN</string>
+
+    <!-- 8. Cannon Arsenal War / Hide Weapons -->
+    <!--endregion-->
+</resources>

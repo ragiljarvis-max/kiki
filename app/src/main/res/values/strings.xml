@@ -1,0 +1,257 @@
+<resources>
+    <string name="app_name">KIKI</string>
+
+    <string name="dialog_positive">OK</string>
+    <string name="dialog_negative">Cancel</string>
+    <string name="error_toast">Error: %s</string>
+
+    <!--region FileTransportActivity-->
+    <string name="file_transport_activity_tab_my_apps">MY APPS</string>
+    <string name="file_transport_activity_tab_my_images">MY IMAGES</string>
+    <string name="file_transport_activity_tab_my_videos">MY VIDEOS</string>
+    <string name="file_transport_activity_tab_my_audios">MY AUDIOS</string>
+    <string name="file_transport_activity_tab_my_dir">MY FOLDER</string>
+    <string name="file_transport_activity_tab_remote_dir">REMOTE FOLDER</string>
+    <string name="file_transport_activity_tab_message">MESSAGE</string>
+    <string name="file_count">%d files</string>
+    <string name="connection_error_title">Connection Error</string>
+    <string name="connection_error_message">Connection is closed, please reconnect.</string>
+    <string name="file_transfer_error_title">Transfer Error</string>
+    <string name="downloading_files_dialog_title" formatted="false">Downloading Files (%d/%d)</string>
+    <string name="sending_files_dialog_title" formatted="false">Sending Files (%d/%d)</string>
+    <string name="app_version">Ver: %s</string>
+    <string name="request_share_title">Request Share</string>
+    <string name="request_share_body">Request share %d files.</string>
+    <string name="request_share_positive">Share</string>
+    <string name="request_share_negative">Drop</string>
+    <!--endregion-->
+
+    <!--region ConnectionActivity-->
+    <string name="local_network_connection_title">Connect Remote Device via LocalNetwork</string>
+    <string name="local_network_connection_description">If two devices in the same local network, you can use this way create connection. \n Use QR code scan or UDP broadcast.</string>
+    <string name="broadcast_connection_local_device">Local Device: %s</string>
+    <string name="broadcast_connection_local_ip_address">Local IP Address: %s</string>
+    <string name="broadcast_connection_use_system_broadcast">Use System Broadcast: </string>
+    <string name="local_network_scan_qr_code">Scan QR Code</string>
+    <string name="local_network_show_qr_code">Show QR Code</string>
+    <string name="broadcast_connection_as_receiver">Search Servers</string>
+    <string name="broadcast_connection_as_sender">As Server</string>
+
+    <string name="broadcast_waiting_connect">Waiting connect&#8230;</string>
+    <string name="broadcast_waiting_cancel">Cancel</string>
+
+    <string name="broadcast_request_connect">Request Connect</string>
+    <string name="broadcast_request_accept">Accept</string>
+    <string name="broadcast_request_deny">Deny</string>
+
+    <string name="broadcast_searching_server">Searching&#8230;</string>
+    <string name="broadcast_searching_cancel">Cancel</string>
+
+    <string name="tcp_scan_title">Scan Devices</string>
+    <string name="tcp_scan_tips">You could scan other devices in the same network. When Server Status is working, your device could be scanned by others.</string>
+    <string name="tcp_scan_server_status_active">Server Status: Working</string>
+    <string name="tcp_scan_server_status_error">Server Status: Error</string>
+    <string name="tcp_scan_scan">Scan</string>
+
+    <string name="wifi_p2p_connection_title">Connect via WiFi P2P</string>
+    <string name="wifi_p2p_connection_tips">Just open the WiFi and GPS, close to the target device and system will find it.</string>
+    <string name="wifi_p2p_connection_remote_device" formatted="false">Connected Remote Device\n Name: %s\n Ip Address: %s \n Status: %s</string>
+    <string name="wifi_p2p_connection_local_address">Local Address: %s</string>
+    <string name="wifi_p2p_connection_transfer_files">Transfer Files</string>
+    <string name="wifi_p2p_connection_close_current_connection">Close Connection</string>
+    <string name="local_network_local_address">Local Addresses: </string>
+
+    <string name="request_share_files">Request share %d files.</string>
+    <string name="drop_request_share_files">Drop</string>
+    <!--endregion-->
+
+    <!--region Size-->
+    <string name="size_B">%dB</string>
+    <string name="size_KB">%.2fKB</string>
+    <string name="size_MB">%.2fMB</string>
+    <string name="size_GB">%.2fGB</string>
+    <!--endregion-->
+
+    <!--region FolderMenu-->
+    <string name="folder_menu_select_all_files">Select All Files</string>
+    <string name="folder_menu_unselect_all_files">Unselect All Files</string>
+    <string name="folder_menu_sort_by_date">Sort By Modified Date</string>
+    <string name="folder_menu_sort_by_file_name">Sort By Name</string>
+    <!--endregion-->
+
+    <!--region TransferSettingsMenu-->
+    <string name="transfer_setting_share_folder">Share My Dir</string>
+    <!--endregion-->
+
+    <!--region SettingsDialog-->
+    <string name="settings_title">Settings</string>
+    <string name="setting_download_dir">Download Folder</string>
+    <string name="setting_share_my_dir">Share My Folder</string>
+    <string name="setting_max_connections_size">Max Tcp Connections</string>
+    <string name="setting_language">Language / اللغة</string>
+    <string name="setting_about_app">About App</string>
+    <string name="setting_developer">Developer: محمد هشام الصلاحي (Mohammed Hisham Al-Salahi)</string>
+    <!--endregion-->
+
+    <!--region RequestPermission-->
+    <string name="permission_request_title">Request Permission</string>
+    <string name="permission_storage_request_content">tFileTransfer needs MANAGE STORAGE permission to share your files.</string>
+    <string name="prompt_enable_location_title">Enable Location</string>
+    <string name="prompt_enable_location_content">Location services must be enabled to discover nearby devices via Wi-Fi Direct. Please enable Location in Settings.</string>
+    <string name="prompt_enable_wifi_title">Enable Wi-Fi</string>
+    <string name="prompt_enable_wifi_content">Wi-Fi must be enabled to connect and transfer files. Please enable Wi-Fi.</string>
+    <!--endregion-->
+
+    <!--region FolderSelectActivity-->
+    <string name="folder_select_title">Select a Folder</string>
+    <string name="folder_select_create">Create a new folder</string>
+    <string name="folder_select_error_title">Select folder fail</string>
+    <string name="folder_select_error_body">Error: %s</string>
+    <string name="folder_select_create_folder_error">Create folder fail</string>
+    <string name="folder_select_create_new_folder_hint">Input folder name</string>
+    <!--endregion-->
+
+    <!--region Media-->
+    <string name="media_artist_name">Artist: %s</string>
+    <string name="media_album_name">Album: %s</string>
+    <!--endregion-->
+
+    <!--region History & Web Share-->
+    <string name="history_title">Transfer History</string>
+    <string name="history_sent_to">Sent to: %s</string>
+    <string name="history_received_from">Received from: %s</string>
+    <string name="history_file_not_found">File not found</string>
+    <string name="history_no_app_found">No app found to open this file</string>
+    
+    <string name="web_share_title">Web Share</string>
+    <string name="web_share_start">Start Web Share</string>
+    <string name="web_share_stop">Stop Web Share</string>
+    <string name="web_share_description">Open the following address in a web browser on another device to download files:</string>
+    <string name="web_share_select_files">Select files to share first</string>
+    <string name="web_share_running">Web Share is Running</string>
+    <string name="web_share_connect_wifi">Please connect to Wi-Fi first.</string>
+    <string name="web_share_failed">Failed to start Web Share</string>
+    <!--endregion-->
+
+    <string name="clone_phone_title">Clone Phone (Transfer All Media &amp; Apps)</string>
+    <string name="instructions_title">Instructions</string>
+    <string name="instructions_desc">This app was designed and programmed to give you the fastest, lightest, and easiest file transfer experience.\n\nHow to Use:\n1. Connect via Wi-Fi Direct or Hotspot.\n2. In Hotspot mode, just scan the QR code to connect instantly.\n3. Browse files and transfer at maximum speed.\n\nGreetings from the developer Mohammed Hisham Al-Salahi</string>
+
+    <!--region File Manager & Sharing-->
+    <string name="file_manager_title">File Manager</string>
+    <string name="file_manager_subtitle">Browse, manage &amp; send Apps, Photos, Videos &amp; Files</string>
+    <string name="shared_files_barcode_ready">Files selected! Opening barcode for sending...</string>
+    <string name="tab_apps">Apps &amp; Games</string>
+    <string name="tab_images">Photos</string>
+    <string name="tab_videos">Videos</string>
+    <string name="tab_audios">Audio</string>
+    <string name="tab_documents">Documents</string>
+    <string name="tab_storage">Storage</string>
+    <string name="storage_stats">Used: %1$s / Total: %2$s</string>
+    <string name="storage_internal">Internal Storage</string>
+    <string name="storage_free">%s free</string>
+    <string name="send_selected">Send (%d)</string>
+    <string name="delete_selected">Delete</string>
+    <string name="select_all">Select All</string>
+    <string name="deselect_all">Clear</string>
+    <string name="search_hint">Search files and apps...</string>
+    <string name="no_files_found">No items found</string>
+    <string name="delete_confirm_title">Delete Items</string>
+    <string name="delete_confirm_msg">Are you sure you want to delete %d selected item(s)?</string>
+    <string name="file_details_title">File Details</string>
+    <string name="file_details_path">Path: %s</string>
+    <string name="file_details_size">Size: %s</string>
+    <string name="file_details_modified">Modified: %s</string>
+    <string name="action_open">Open</string>
+    <string name="action_send">Send</string>
+    <string name="action_delete">Delete</string>
+    <string name="action_details">Details</string>
+    <string name="action_rename">Rename</string>
+    <string name="action_share">Share</string>
+    <string name="rename_dialog_title">Rename Item</string>
+    <string name="rename_dialog_hint">Enter new name</string>
+    <string name="create_folder">New Folder</string>
+    <string name="create_folder_hint">Folder name</string>
+    <!--endregion-->
+
+    <!--region 4 Professional Additions (1, 2, 3, 4)-->
+    <!-- 1. Junk & Storage Cleaner -->
+    <string name="cleaner_title">Phone Cleaner</string>
+    <string name="cleaner_subtitle">Clean junk files, cache &amp; free up storage</string>
+    <string name="cleaner_scanning">Scanning system storage…</string>
+    <string name="cleaner_clean_now">Clean Now (%s)</string>
+    <string name="cleaner_cleaned_success">Successfully cleaned %s of junk files!</string>
+    <string name="cleaner_no_junk">Your phone is clean and optimized!</string>
+    <string name="cleaner_cat_cache">App Cache &amp; Temp Files</string>
+    <string name="cleaner_cat_apk">Obsolete APK Installers</string>
+    <string name="cleaner_cat_empty_dirs">Empty Folders</string>
+    <string name="cleaner_cat_large_files">Large Files (>50 MB)</string>
+    <string name="cleaner_cat_duplicate">Duplicate Logs &amp; Downloads</string>
+    <string name="cleaner_items_count">%1$d items (%2$s)</string>
+    <string name="cleaner_item_delete_warning">Are you sure you want to clean the selected junk files?</string>
+
+    <!-- 2. APK Extractor & App Backup -->
+    <string name="apk_extractor_title">APK Extractor &amp; Backup</string>
+    <string name="apk_extractor_subtitle">Extract, backup &amp; share installed apps and games</string>
+    <string name="apk_extract_btn">Extract APK</string>
+    <string name="apk_extracted_success">APK saved to: %s</string>
+    <string name="apk_extract_failed">Failed to extract APK</string>
+    <string name="apk_extract_all">Extract Selected (%d)</string>
+    <string name="apk_send_barcode">Send via Barcode</string>
+    <string name="apk_version">Version: %s</string>
+    <string name="apk_package">Package: %s</string>
+    <string name="apk_search_hint">Search apps &amp; games…</string>
+
+    <!-- 3. Transfer Speedometer & Performance Booster -->
+    <string name="speed_peak">Peak: %s</string>
+    <string name="speed_eta">ETA: %s</string>
+    <string name="speed_high_indicator">⚡ Super Speed</string>
+    <string name="transfer_completed_title">Transfer Complete!</string>
+    <string name="transfer_summary_format">Transferred %1$d file(s) (%2$s) in %3$s at %4$s avg speed</string>
+
+    <!-- 4. Instant Text & Clipboard Sharing -->
+    <string name="clipboard_paste_send">Paste &amp; Send</string>
+    <string name="clipboard_copied">Copied to clipboard!</string>
+    <string name="clipboard_open_link">Open Link</string>
+    <!-- 5. Wi-Fi & Network Speed Analyzer -->
+    <string name="network_speed_title">Network &amp; Wi-Fi Speed</string>
+    <string name="network_speed_subtitle">Signal meter, link speed &amp; transfer latency</string>
+    <string name="network_speed_test_btn">Start Speed Test</string>
+    <string name="network_speed_testing">Testing network throughput…</string>
+    <string name="network_speed_ping">Ping Latency: %d ms</string>
+    <string name="network_speed_link">Link Speed: %d Mbps</string>
+    <string name="network_speed_signal">Signal Strength: %1$d dBm (%2$s)</string>
+    <string name="network_speed_band">Frequency: %s</string>
+    <string name="network_speed_ssid">Connected Wi-Fi: %s</string>
+    <string name="network_speed_tip_5ghz">🚀 Tip: 5GHz Wi-Fi / Hotspot offers up to 5x faster transfer speeds than 2.4GHz!</string>
+    <string name="network_speed_excellent">Excellent (Super Fast)</string>
+    <string name="network_speed_good">Good</string>
+    <string name="network_speed_fair">Fair</string>
+    <string name="network_speed_weak">Weak (Slow Transfer)</string>
+    <string name="network_speed_download">Speed: %s</string>
+    <string name="network_speed_local_ip">Local IP: %s</string>
+
+    <!-- 7. Secure Vault / Private Safe -->
+    <string name="vault_title">Secure Vault</string>
+    <string name="vault_subtitle">Lock &amp; hide private photos, videos &amp; files</string>
+    <string name="vault_enter_pin">Enter 4-Digit PIN</string>
+    <string name="vault_setup_pin">Set New 4-Digit PIN</string>
+    <string name="vault_confirm_pin">Confirm 4-Digit PIN</string>
+    <string name="vault_pin_mismatch">PINs do not match, please try again</string>
+    <string name="vault_pin_wrong">Incorrect PIN, please try again</string>
+    <string name="vault_pin_set_success">Vault PIN set successfully!</string>
+    <string name="vault_empty">No locked files in vault.\nTap + to hide private files safely!</string>
+    <string name="vault_add_files">Add to Vault</string>
+    <string name="vault_restore">Restore to Storage</string>
+    <string name="vault_restored_success">File restored back to original storage</string>
+    <string name="vault_locked_success">Moved %d item(s) into Secure Vault</string>
+    <string name="vault_delete_confirm">Delete this file permanently from Vault?</string>
+    <string name="vault_tab_all">All Files</string>
+    <string name="vault_tab_photos">Photos</string>
+    <string name="vault_tab_videos">Videos</string>
+    <string name="vault_tab_docs">Documents</string>
+    <string name="vault_change_pin">Change PIN</string>
+
+    <!-- 8. Cannon Arsenal War / Hide Weapons -->
+    <!--endregion-->
+</resources>

@@ -1,0 +1,311 @@
+package net.garybully.kiki.ui
+
+import androidx.appcompat.widget.PopupMenu
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.fragment.app.FragmentActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import net.garybully.kiki.R
+import net.garybully.kiki.databinding.FileItemLayoutBinding
+import net.garybully.kiki.databinding.FileTreeLayoutBinding
+import net.garybully.kiki.databinding.FolderItemLayoutBinding
+import net.garybully.kiki.file.FileLeaf
+import net.garybully.kiki.file.FileTree
+import net.garybully.kiki.file.fileDateText
+import net.garybully.kiki.file.isRootFileTree
+import net.garybully.kiki.file.extractFilesFromDir
+import net.garybully.kiki.toSizeString
+import net.garybully.kiki.ui.commomdialog.loadingDialogSuspend
+import net.garybully.kiki.utils.dp2px
+import net.garybully.kiki.utils.firstVisibleItemPosition
+import com.tans.tuiutils.adapter.decoration.MarginDividerItemDecoration
+import com.tans.tuiutils.adapter.impl.builders.SimpleAdapterBuilderImpl
+import com.tans.tuiutils.adapter.impl.builders.plus
+import com.tans.tuiutils.adapter.impl.databinders.DataBinderImpl
+import com.tans.tuiutils.adapter.impl.datasources.DataSourceImpl
+import com.tans.tuiutils.adapter.impl.viewcreatators.SingleItemViewCreatorImpl
+import com.tans.tuiutils.state.CoroutineState
+import com.tans.tuiutils.view.clicks
+import net.garybully.kiki.utils.openFile
+import com.tans.tuiutils.view.refreshes
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import java.io.File
+import java.util.concurrent.LinkedBlockingDeque
+
+
+class FileTreeUI(
+    private val context: FragmentActivity,
+    private val viewBinding: FileTreeLayoutBinding,
+    private val rootTreeUpdater: suspend () -> FileTree,
+    private val subTreeUpdater: suspend (parentTree: FileTree, dir: FileLeaf.DirectoryFileLeaf) -> FileTree,
+    private val coroutineScope: CoroutineScope,
+    override val stateFlow: MutableStateFlow<FileTreeState>,
+    private val recyclerViewScrollChannel: Channel<Int>,
+    private val folderPositionDeque: LinkedBlockingDeque<Int>
+) : CoroutineScope by coroutineScope, CoroutineState<FileTreeUI.Companion.FileTreeState> {
+
+    private val dirDataSource: DataSourceImpl<FileLeaf.DirectoryFileLeaf> by lazy {
+        DataSourceImpl()
+    }
+
+    private val fileDataSource: DataSourceImpl<Pair<FileLeaf.CommonFileLeaf, Boolean>> by lazy {
+        DataSourceImpl(
+            areDataItemsTheSameParam = { d1, d2 -> d1.first == d2.first },
+            areDataItemsContentTheSameParam = {d1, d2 -> d1 == d2},
+            getDataItemsChangePayloadParam = { d1, d2 -> if (d1.first == d2.first && d1.second != d2.second) Unit else null }
+        )
+    }
+
+    init {
+        val currentState = currentState()
+
+        // Empty State, need to load root tree.
+        if (currentState == FileTreeState()) {
+            launch(Dispatchers.IO) {
+                val rootTree = rootTreeUpdater()
+                updateState { s ->
+                    s.copy(fileTree = rootTree)
+                }
+            }
+        }
+
+        renderStateNewCoroutine({ it.fileTree.path }) {
+            viewBinding.pathTv.text = it
+        }
+
+        val directoryAdapterBuilder = SimpleAdapterBuilderImpl<FileLeaf.DirectoryFileLeaf> (
+            itemViewCreator = SingleItemViewCreatorImpl(R.layout.folder_item_layout),
+            dataSource = dirDataSource,
+            dataBinder = DataBinderImpl { data, view, _ ->
+                val itemViewBinding = FolderItemLayoutBinding.bind(view)
+                itemViewBinding.titleTv.text = data.name
+                itemViewBinding.filesCountTv.text = context.getString(R.string.file_count, data.childrenCount)
+                itemViewBinding.modifiedDateTv.text = data.lastModified.fileDateText()
+                itemViewBinding.root.clicks(coroutineScope = coroutineScope, clickWorkOn = Dispatchers.IO) {
+                    context.supportFragmentManager.loadingDialogSuspend {
+                        val i = withContext(Dispatchers.Main) {
+                            viewBinding.fileFolderRv.firstVisibleItemPosition()
+                        }
+                        folderPositionDeque.push(i)
+                        val parentTree = currentState().fileTree
+                        val newTree = subTreeUpdater(parentTree, data)
+                        updateState { oldState ->
+                            oldState.copy(fileTree = newTree, selectedFiles = emptyList())
+                        }
+                    }
+                }
+            }
+        )
+
+        val fileAdapterBuilder = SimpleAdapterBuilderImpl<Pair<FileLeaf.CommonFileLeaf, Boolean>>(
+            itemViewCreator = SingleItemViewCreatorImpl(R.layout.file_item_layout),
+            dataSource = fileDataSource,
+            dataBinder = DataBinderImpl<Pair<FileLeaf.CommonFileLeaf, Boolean>> { data, view, _ ->
+                val itemViewBinding = FileItemLayoutBinding.bind(view)
+                itemViewBinding.titleTv.text = data.first.name
+                itemViewBinding.modifiedDateTv.text = data.first.lastModified.fileDateText()
+                itemViewBinding.filesSizeTv.text = data.first.size.toSizeString()
+
+                val isViewerMode = context.intent.getBooleanExtra("viewer_mode_extra_key", false)
+                if (isViewerMode) { itemViewBinding.fileCb.visibility = android.view.View.GONE }
+                itemViewBinding.root.clicks(coroutineScope) {
+                    if (isViewerMode) { context.openFile(java.io.File(data.first.path)); return@clicks }
+                    val currentFile = data.first
+                    val selectedFiles = currentState().selectedFiles
+                    val newSelectedFiles = if (selectedFiles.contains(currentFile)) {
+                        selectedFiles - currentFile
+                    } else {
+                        selectedFiles + currentFile
+                    }
+                    updateState { it.copy(selectedFiles = newSelectedFiles) }
+                }
+            }.addPayloadDataBinder(Unit, ) { data, view, _ ->
+                val itemViewBinding = FileItemLayoutBinding.bind(view)
+                itemViewBinding.fileCb.isChecked = data.second
+            }
+        )
+
+
+        viewBinding.fileFolderRv.adapter = (directoryAdapterBuilder + fileAdapterBuilder).build()
+
+        renderStateNewCoroutine({ state ->
+            val fileTree = state.fileTree
+            val sortType = state.sortType
+            val selectedFiles = state.selectedFiles
+            fileTree.dirLeafs.sortDir(sortType) to fileTree.fileLeafs.sortFile(sortType).map { it to selectedFiles.contains(it) }
+        }) { (dirs, files) ->
+            var position = recyclerViewScrollChannel.tryReceive().getOrNull()
+            val allSize = dirs.size + files.size
+            fun positionFix() {
+                val p = position
+                position = null
+                if (p != null && p < allSize) {
+                    (viewBinding.fileFolderRv.layoutManager as? LinearLayoutManager)?.scrollToPositionWithOffset(p, 0)
+                }
+            }
+            dirDataSource.submitDataList(dirs) { positionFix() }
+            fileDataSource.submitDataList(files) { positionFix() }
+        }
+
+        viewBinding.fileFolderRv.addItemDecoration(
+            MarginDividerItemDecoration.Companion.Builder()
+                .divider(MarginDividerItemDecoration.Companion.ColorDivider(context.getColor(R.color.line_color), context.dp2px(1)))
+                .marginStart(context.dp2px(65))
+                .build()
+        )
+
+        viewBinding.refreshLayout.setColorSchemeResources(R.color.teal_200)
+        viewBinding.refreshLayout.refreshes(coroutineScope = coroutineScope, refreshWorkOn = Dispatchers.IO) {
+            val oldState = currentState()
+            val oldTree = oldState.fileTree
+            val newTree = if (oldTree.isRootFileTree()) {
+                rootTreeUpdater()
+            } else {
+                val parentTree = oldTree.parentTree
+                val dirLeaf = parentTree?.dirLeafs?.find { it.path == oldTree.path }
+                if (parentTree != null && dirLeaf != null) {
+                    subTreeUpdater(parentTree, dirLeaf)
+                } else {
+                    null
+                }
+            }
+            if (newTree != null) {
+                updateState { it.copy(fileTree = newTree, selectedFiles = emptyList()) }
+            } else {
+                updateState { it.copy( selectedFiles = emptyList()) }
+            }
+        }
+
+        val popupMenu = PopupMenu(context, viewBinding.folderMenuLayout)
+        popupMenu.inflate(R.menu.folder_menu)
+
+        popupMenu.setOnMenuItemClickListener {
+            val itemId = it.itemId
+            if (itemId == R.id.send_folder) {
+                // Return selected folder to the activity to send
+                val currentTree = currentState().fileTree
+                if (currentTree is FileTree) {
+                    val folderExploreFiles = extractFilesFromDir(java.io.File(currentTree.path))
+                    // Select all files in this folder using Coroutine scope and explore tree logic
+                    // We'll update the state to have selected files include ALL files recursively,
+                    // but since fileTreeLeafs only show the current folder, we'll just return it.
+                    updateState { s -> s.copy(selectedFiles = folderExploreFiles.map { f -> FileLeaf.CommonFileLeaf(f.name, f.path, f.lastModify, f.size) }) }
+                }
+                return@setOnMenuItemClickListener true
+            }
+
+            updateState { oldState ->
+                val tree = oldState.fileTree
+                when (it.itemId) {
+                    R.id.select_all_files -> {
+                        oldState.copy(fileTree = tree, selectedFiles = tree.fileLeafs)
+                    }
+
+                    R.id.unselect_all_files -> {
+                        oldState.copy(fileTree = tree, selectedFiles = emptyList())
+                    }
+
+                    R.id.sort_by_date -> {
+                        if (oldState.sortType != FileSortType.SortByDate) {
+                            recyclerViewScrollChannel.trySend(0).isSuccess
+                            oldState.copy(
+                                sortType = FileSortType.SortByDate
+                            )
+                        } else {
+                            oldState
+                        }
+                    }
+
+                    R.id.sort_by_name -> {
+                        if (oldState.sortType != FileSortType.SortByName) {
+                            recyclerViewScrollChannel.trySend(0).isSuccess
+                            oldState.copy(sortType = FileSortType.SortByName)
+                        } else {
+                            oldState
+                        }
+                    }
+
+                    else -> {
+                        oldState
+                    }
+                }
+            }
+            true
+        }
+
+        viewBinding.folderMenuLayout.clicks(coroutineScope) {
+            popupMenu.show()
+        }
+
+        ViewCompat.setOnApplyWindowInsetsListener(viewBinding.fileFolderRv) { v, insets ->
+            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            v.setPadding(v.paddingLeft, v.paddingTop, v.paddingRight, systemBars.bottom + viewBinding.root.context.dp2px(85))
+            insets
+        }
+    }
+
+    fun getSelectedFiles(): List<FileLeaf.CommonFileLeaf> = currentState().selectedFiles
+
+    fun clearSelectedFiles() {
+        updateState { it.copy(selectedFiles = emptyList()) }
+    }
+
+    fun backPress(): Boolean {
+        val lastState = currentState()
+        val parentTree = lastState.fileTree.parentTree
+        return if (parentTree == null) {
+            false
+        } else {
+            val p = folderPositionDeque.poll()
+            if (p != null) {
+                recyclerViewScrollChannel.trySend(p).isSuccess
+            }
+            updateState {
+                lastState.copy(fileTree = parentTree)
+            }
+            true
+        }
+    }
+
+    companion object {
+
+        enum class FileSortType {
+            SortByDate,
+            SortByName
+        }
+
+        data class FileTreeState(
+            val fileTree: FileTree = FileTree(
+                dirLeafs = emptyList(),
+                fileLeafs = emptyList(),
+                path = File.separator,
+                parentTree = null
+            ),
+            val selectedFiles: List<FileLeaf.CommonFileLeaf> = emptyList(),
+            val sortType: FileSortType = FileSortType.SortByName
+        )
+
+        private fun List<FileLeaf.CommonFileLeaf>.sortFile(sortType: FileSortType): List<FileLeaf.CommonFileLeaf> = when (sortType) {
+            FileSortType.SortByDate -> {
+                sortedByDescending { it.lastModified }
+            }
+            FileSortType.SortByName -> {
+                sortedBy { it.name }
+            }
+        }
+
+        private fun List<FileLeaf.DirectoryFileLeaf>.sortDir(sortType: FileSortType): List<FileLeaf.DirectoryFileLeaf> = when (sortType) {
+            FileSortType.SortByDate -> {
+                sortedByDescending { it.lastModified }
+            }
+            FileSortType.SortByName -> {
+                sortedBy { it.name }
+            }
+        }
+    }
+}
