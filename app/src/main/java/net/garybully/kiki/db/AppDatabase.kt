@@ -5,9 +5,14 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 
-@Database(entities = [TransferHistory::class], version = 2, exportSchema = false)
+@Database(
+    entities = [TransferHistory::class, ChatMessageEntity::class, ContactEntity::class, GroupEntity::class, GroupMemberEntity::class],
+    version = 3,
+    exportSchema = false
+)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun transferHistoryDao(): TransferHistoryDao
+    abstract fun chatDao(): ChatDao
 
     companion object {
         @Volatile

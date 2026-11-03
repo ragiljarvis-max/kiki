@@ -23,7 +23,7 @@ corouines = "1.10.2"
 moshi = "1.15.2"
 netty = "4.1.86.Final"
 okio = "3.16.0"
-room = "2.6.1"
+room = "2.7.2"
 rxbinding = "4.0.0"
 camerax = "1.5.0"
 barcodescan = "17.3.0"
@@ -48,6 +48,7 @@ androidx-swiperefreshlayout = { group = "androidx.swiperefreshlayout", name="swi
 androidx-recyclerview = { group = "androidx.recyclerview", name = "recyclerview", version.ref = "recyclerview" }
 androidx-annotaion = { group = "androidx.annotation", name = "annotation", version.ref = "annotaion" }
 androidx-lifecycle-rumtime = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "lifecycle" }
+androidx-lifecycle-runtime-compose = { group = "androidx.lifecycle", name = "lifecycle-runtime-compose", version.ref = "lifecycle" }
 androidx-lifecycle-viewmodel = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-ktx", version.ref = "lifecycle" }
 androidx-lifecycle-compiler = { group = "androidx.lifecycle", name = "lifecycle-compiler", version.ref = "lifecycle" }
 flexbox = { group = "com.google.android.flexbox", name = "flexbox", version.ref = "flexbox" }
